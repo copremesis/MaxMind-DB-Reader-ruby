@@ -98,7 +98,6 @@ module MaxMind # :nodoc:
         raise ArgumentError, 'Invalid mode'
       end
 
-      yield @io if block_given?
 
 
       begin
@@ -122,6 +121,9 @@ module MaxMind # :nodoc:
         # Find @ipv4_start up front. If we don't, we either have a race to
         # get/set it or have to synchronize access.
         start_node(0)
+
+      yield self if block_given?
+
       rescue StandardError => e
         @io.close
         raise e
