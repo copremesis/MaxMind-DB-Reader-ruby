@@ -98,6 +98,9 @@ module MaxMind # :nodoc:
         raise ArgumentError, 'Invalid mode'
       end
 
+      yield @io if block_given?
+
+
       begin
         @size = @io.size
 
